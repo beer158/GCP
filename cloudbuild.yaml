@@ -1,0 +1,4 @@
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/beer158/GCP.git']
+  

@@ -12,4 +12,13 @@ steps:
         cd environments/$BRANCH_NAME
         terraform init
       fi 
-  
+- id: 'tf-plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args:
+  - '-c' 
+  - |
+      if [ -d "environments/$BRANCH_NAME/" ]; then
+        cd environments/$BRANCH_NAME
+        terraform plan
+      fi 

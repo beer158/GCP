@@ -23,7 +23,7 @@ steps:
         for dir in environments/*/
         do 
           cd ${dir}   
-          env=${dir%*/}
+          env=${dir}
           echo ""
           echo "*************** TERRAFORM INIT ******************"
           echo "******* At environment: ${env} ********"
@@ -47,7 +47,7 @@ steps:
         for dir in environments/*/
         do 
           cd ${dir}   
-          env=${dir%*/}
+          env=${dir}
           echo ""
           echo "*************** TERRAFOM PLAN ******************"
           echo "******* At environment: ${env} ********"

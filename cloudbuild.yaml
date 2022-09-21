@@ -1,7 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/git'
   args: ['clone', 'https://github.com/beer158/GCP.git']
-  
+
 - id: 'branch name'
   name: 'alpine'
   entrypoint: 'sh'  
@@ -21,6 +21,13 @@ steps:
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME
         terraform init
+      else
+        for dir in environments/*/
+        do
+          cd ${dir}  
+          terraform init || exit 1
+          cd ../../
+        done
       fi 
 - id: 'tf-plan'
   name: 'hashicorp/terraform:1.0.0'

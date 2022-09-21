@@ -1,7 +1,5 @@
-steps:
-- name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/beer158/GCP.git']
 
+steps:
 - id: 'branch name'
   name: 'alpine'
   entrypoint: 'sh'  
@@ -25,25 +23,52 @@ steps:
         for dir in environments/*/
         do 
           cd ${dir}   
-          env=${dir*/}
-          env=${env*/}
           echo ""
           echo "*************** TERRAFORM INIT ******************"
-          echo "******* At environment: ${env} ********"
+          echo "******* At environment: ********" ${dir}
           echo "*************************************************"
           terraform init || exit 1
           cd ../../
         done
       fi 
 
-
-- id: 'tf-plan'
+# [START tf-plan]
+- id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
-  args:
-  - '-c' 
-  - |
+  args: 
+  - '-c'
+  - | 
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME
         terraform plan
+      else
+        for dir in environments/*/
+        do 
+          cd ${dir}   
+          echo ""
+          echo "*************** TERRAFOM PLAN ******************"
+          echo "******* At environment: ********" ${dir}
+          echo "*************************************************"
+          terraform plan || exit 1
+          cd ../../
+        done
       fi 
+# [END tf-plan]
+
+# [START tf-apply]
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "environments/$BRANCH_NAME/" ]; then
+        cd environments/$BRANCH_NAME      
+        terraform apply -auto-approve
+      else
+        echo "***************************** SKIPPING APPLYING *******************************"
+        echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
+        echo "*******************************************************************************"
+      fi
+# [END tf-apply]      

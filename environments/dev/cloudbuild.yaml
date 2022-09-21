@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/cloud-builder/git'
+    args: ['remote', 'add', 'origin', 'https://beer158:Pk@23sav@github.com/beer158/project.git']
+
+  - name: 'gcr.io/cloud-builder/git'    
+    args: ['clone', 'https://github.com/beer158/GCP.git']
+
+
+
+
+   

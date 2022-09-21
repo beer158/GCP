@@ -9,3 +9,8 @@ provider "google-beta" {
   region      = var.region
 #   credentials = file("C:\\Users\\beerappayalla.karad\\OneDrive - HCL Technologies Ltd\\Desktop\\Terraform-Modules\\beersa.json")
 }
+
+
+terraform {
+  required_version = "~> 1.0.0"
+}

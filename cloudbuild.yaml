@@ -78,7 +78,7 @@ steps:
       fi
 # [END tf-apply]      
 
-logsBucket: 'myproject-357910-tfstate'
-serviceAccount: 'projects/myproject-357910/serviceAccounts/custom-cloudbuild@myproject-357910.iam.gserviceaccount.com'
-#options:
-# logging: CLOUD_LOGGING_ONLY
+
+#serviceAccount: 'projects/myproject-357910/serviceAccounts/custom-cloudbuild@myproject-357910.iam.gserviceaccount.com'
+options:
+ logging: CLOUD_LOGGING_ONLY
